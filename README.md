@@ -1,9 +1,9 @@
 # [Read the Developer Guide - iRoopDeepFaceCam: A Deep Dive into Face Swapping](https://github.com/iVideoGameBoss/iRoopDeepFaceCam/wiki)
 
-# iRoopDeepFaceCam 
+# iRoopDeepFaceCam
 ![iRoopDeepFaceCam-jpg](iRoopDeepFaceCam.jpg)
 
-Get ready to dive into a whole new world of fun with iRoopDeepFaceCam! This innovative tool, inspired by the original [roop](https://github.com/s0md3v/roop) lets you create face swaps using a live webcam, video, or image file. Want to make it even more exciting? Use an OBS virtual camera to act as your webcam! 
+Get ready to dive into a whole new world of fun with iRoopDeepFaceCam! This innovative tool, inspired by the original [roop](https://github.com/s0md3v/roop) lets you create face swaps using a live webcam, video, or image file. Want to make it even more exciting? Use an OBS virtual camera to act as your webcam!
 
 iRoopDeepFaceCam features are groundbreaking that [Deep-Live-Cam](https://github.com/hacksider/Deep-Live-Cam) is now adding them to thier code such as our amazing Mouth Mask feature and more. iRoopDeepFaceCam has changed the world of face swap forever that no other app could do.
 
@@ -20,7 +20,7 @@ But that's not all! iRoopDeepFaceCam also offers face tracking for one to ten fa
 
 To kick off the Live webcam feature in iRoopDeepFaceCam, just hit the 'Live' button. It takes about 30 seconds for the preview window to pop up. You can adjust the resolution of the live webcam to suit your needs, but keep in mind that higher resolutions may slow down the face swap process. Feel free to switch resolutions based on your computer's power and performance.
 
-No worries about the preview window size—you can resize it independently of the webcam resolution. Want to go full screen? You can make the preview window as large as you like without affecting the face swap rendering. The rendering will stay smooth, no matter the size of your preview window. Enjoy seamless face swap fun with complete control over your setup!  
+No worries about the preview window size—you can resize it independently of the webcam resolution. Want to go full screen? You can make the preview window as large as you like without affecting the face swap rendering. The rendering will stay smooth, no matter the size of your preview window. Enjoy seamless face swap fun with complete control over your setup!
 
 Webcam resolution can also control the quality of filters, like White Ink, Black Ink and Pencil. Low resolution will give you thicker lines, and higer resolution will give you thinner lines.
 
@@ -110,7 +110,7 @@ When you enable 'Auto Face Track', the Face Index is automatically set to -1. Yo
     *   **Important Considerations:**
         *   All faces you want to track *must* be clearly visible and unobstructed when you start face tracking. This is how the system initially memorizes their unique features.
         *   If the face has hair in front of it and is moving around where the face keeps hiding the the face detection score will be low, you will see flickering. You can Reset Face Tracking to try to capture a good face for a few frames. But these types of constant face hiding is not ideal.
-        *   If a person walks into the frame later, they won't be automatically tracked unless you reset the tracking. 
+        *   If a person walks into the frame later, they won't be automatically tracked unless you reset the tracking.
         *   For webcam use, make sure all desired participants are within view of the camera before activating tracking.
         *   For video files, the tracking works best if the participants are visible at the beginning of the video.
         *   In the middle of swapping a video, clicking the 'Reset Face Tracking' button will not reset the face tracking. You would have to do this before you click the 'Start' button.
@@ -147,13 +147,13 @@ iRoopDeepFaceCam offers flexible face tracking options:
 
 ### What happens if the faces are blocked or covered
 
-*   If the tracked faces get blocked for too long, the system may loose track of them. If this happens you should reset the face tracking. 
+*   If the tracked faces get blocked for too long, the system may loose track of them. If this happens you should reset the face tracking.
 *   To stop the system from "flickering" when there is a small obstruction in front of the face like hair when starting to track. The system does not always perform a face swap if the score is too low. If a tracked face is missing for too long the system will generate a fake face at the last known location when pesudo is on and perform a face swap with that fake face.
 
 ### Resetting Face Tracking
 
 *   If you think the tracking has become inaccurate, you can always click on the `Reset Face Tracking` button, this will clear all of the tracked data and start tracking faces again. The new tracked faces will start from the left of the frame.
-*   When using videos you can only reset the face tracking when you load the video. You can not reset the face tracking in the middle of a video being processed. 
+*   When using videos you can only reset the face tracking when you load the video. You can not reset the face tracking in the middle of a video being processed.
 
 ### Video Specifics
 
@@ -171,7 +171,7 @@ If your subjects are going to be moving too much on screen where the heads are t
 
 ### You don't have to always use face tracking
 
-If your webcam or video is showing people who will never move from their positions, then it is pointless to use face tracking. You want to use face tracking if people are switching positions. 
+If your webcam or video is showing people who will never move from their positions, then it is pointless to use face tracking. You want to use face tracking if people are switching positions.
 
 Also for example if you have lets say less source faces and more target faces and you enable, 'Use All Source Faces (10)' without auto tracking, then the sources faces will just repeat.
 
@@ -203,7 +203,7 @@ Face detection occurs from either the left or right side of the frame. When trac
 
 Finding the right balance of people on screen and tracking conditions may require some trial and error to determine what works best for your situation!
 
-## Face Rotation Range in Video 
+## Face Rotation Range in Video
 
 ![facerotation-jpg](images/facerotation.jpg)
 
@@ -247,7 +247,7 @@ You can control how a face/s is replaced on target face\s
 
 1. **Use First Two Source Faces**: Enable this option if your source image has two faces and you want to replace both faces in your webcam feed, video, or image. By default, the left face in the source image is "Face 1" and the right face is "Face 2". If a face goes out of the frame in your video, "Face 1" will be used. To switch which face is used, see the "Flip left/right faces" option below.
 
-2. **Flip First Two Source Faces**: Turn this option on to swap the roles of the faces in your source image. The right face becomes "Face 1" and the left face becomes "Face 2". This is handy for swapping faces in your webcam feed, video, or image when you have one or two faces. 
+2. **Flip First Two Source Faces**: Turn this option on to swap the roles of the faces in your source image. The right face becomes "Face 1" and the left face becomes "Face 2". This is handy for swapping faces in your webcam feed, video, or image when you have one or two faces.
 
 3. **Detect Target Faces From Right**: Use this feature when you have one target face and the "Show both faces" option is off. By default, faces are detected from the left side of the webcam, video, or image. If you have background elements like a picture frame to the left of the person, this option helps by detecting and replacing "Face 2" first, then "Face 1". This allows you to control which detected face gets replaced first.
 
@@ -268,7 +268,7 @@ Users of this software are expected to use this software responsibly while abidi
 -   python (3.10 recommended)
 -   pip
 -   git
--   [ffmpeg](https://www.youtube.com/watch?v=OlNWCpFdVMA) 
+-   [ffmpeg](https://www.youtube.com/watch?v=OlNWCpFdVMA)
 -   [visual studio 2022 runtimes (windows)](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 
 #### 2. Clone Repository
@@ -280,10 +280,10 @@ Users of this software are expected to use this software responsibly while abidi
     - Open your command prompt or terminal.
     - Navigate to the root of the C:\ drive or the folder where you want to clone the repository.
         - To navigate to the root drive, you can use:
-          
+
         ```cd C:\```
         - To navigate to a specific folder, folder must already exist. use:
-        
+
         ```cd C:\iRoopDeepFaceCam```
 
     - Run the following command to clone the repository:
@@ -297,11 +297,11 @@ Users of this software are expected to use this software responsibly while abidi
     - If you cloned to the root drive, use:
 
        ```cd iRoopDeepFaceCam```
-      
+
     - If you cloned into a specific folder (e.g., C:\iRoopDeepFaceCam), you would still use:
 
        ```cd iRoopDeepFaceCam```
-        
+
 Regardless of where you cloned the repository, ensure you navigate to the iRoopDeepFaceCam folder to proceed with further instructions.
 
 #### 2. Download Models
@@ -316,17 +316,17 @@ Then put those 2 files oi the "**models**" folder
 1. Run each command line by line from the iRoopDeepFaceCam folder you navigated to from the instructinons above. This is the folder where you see all the files and folders from the clone.
 
    ```python -m venv venv```
-      
+
    ```cd venv```
-      
+
    ```cd Scripts```
-      
+
    ```activate```
-      
+
    ```cd..```
-      
+
    ```cd..```
-      
+
 #### 4. Install dependency
 Continuing from the instructions above, you will need to run the following command to install the necessary dependencies:
 ```
@@ -339,13 +339,13 @@ For MAC OS, You have to install or upgrade python-tk package:
 brew install python-tk@3.10
 ```
 #### 5. Run iRoopDeepFaceCam
-Now you should be ready to run iRoopDeepFaceCam. 
+Now you should be ready to run iRoopDeepFaceCam.
 ```
 python run.py --execution-provider cpu
 ```
 ##### DONE!!! If you dont have any GPU, You should be able to run roop using `python run.py` command. Keep in mind that while running the program for first time, it will download some models which can take time depending on your network connection.
 
-Here's a quick tip, you can run the CPU or GPU like this. 
+Here's a quick tip, you can run the CPU or GPU like this.
 
 CPU
 ```
@@ -359,7 +359,7 @@ python run.py --execution-provider cuda --execution-threads 5
 
 #### 6. Run iRoopDeepFaceCam again and again
 
-You can also click on the bat files that make it easy to run again and again. 
+You can also click on the bat files that make it easy to run again and again.
 
 run-cpu.bat
 
@@ -501,142 +501,142 @@ Looking for a CLI mode? Using the -s/--source argument will make the run program
 
 If you want to use WSL2 on Windows 11 you will notice, that Ubuntu WSL2 doesn't come with USB-Webcam support in the Kernel. You need to do two things: Compile the Kernel with the right modules integrated and forward your USB Webcam from Windows to Ubuntu with the usbipd app. Here are detailed Steps:
 
-This tutorial will guide you through the process of setting up WSL2 Ubuntu with USB webcam support, rebuilding the kernel, and preparing the environment for the Deep-Live-Cam project.  
-  
-#### 1. Install WSL2 Ubuntu  
-  
-Install WSL2 Ubuntu from the Microsoft Store or using PowerShell:  
-  
-#### 2. Enable USB Support in WSL2  
-  
-1. Install the USB/IP tool for Windows:  
-[https://learn.microsoft.com/en-us/windows/wsl/connect-usb](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)  
-  
-2. In Windows PowerShell (as Administrator), connect your webcam to WSL:  
-  
-```powershell  
-usbipd list  
-usbipd bind --busid x-x # Replace x-x with your webcam's bus ID  
-usbipd attach --wsl --busid x-x # Replace x-x with your webcam's bus ID  
-```  
- You need to redo the above every time you reboot wsl or re-connect your webcam/usb device.
- 
-#### 3. Rebuild WSL2 Ubuntu Kernel with USB and Webcam Modules  
-  
-Follow these steps to rebuild the kernel:  
-  
-1. Start with this guide: [https://github.com/PINTO0309/wsl2_linux_kernel_usbcam_enable_conf](https://github.com/PINTO0309/wsl2_linux_kernel_usbcam_enable_conf)  
-  
-2. When you reach the `sudo wget [github.com](http://github.com/)...PINTO0309` step, which won't work for newer kernel versions, follow this video instead or alternatively follow the video tutorial from the beginning: 
-[https://www.youtube.com/watch?v=t_YnACEPmrM](https://www.youtube.com/watch?v=t_YnACEPmrM)  
-  
-Additional info: [https://askubuntu.com/questions/1413377/camera-not-working-in-cheese-in-wsl2](https://askubuntu.com/questions/1413377/camera-not-working-in-cheese-in-wsl2)  
-  
-3. After rebuilding, restart WSL with the new kernel. 
-  
-#### 4. Set Up Deep-Live-Cam Project  
- Within Ubuntu:
-1. Clone the repository:  
-  
-```bash  
-git clone https://github.com/iVideoGameBoss/iRoopDeepFaceCam.git
-```  
+This tutorial will guide you through the process of setting up WSL2 Ubuntu with USB webcam support, rebuilding the kernel, and preparing the environment for the Deep-Live-Cam project.
 
-2. Follow the installation instructions in the repository, including cuda toolkit 11.8, make 100% sure it's not cuda toolkit 12.x.  
-   
-#### 5. Verify and Load Kernel Modules  
-  
-1. Check if USB and webcam modules are built into the kernel:  
-  
-```bash  
-zcat /proc/config.gz | grep -i "CONFIG_USB_VIDEO_CLASS"  
-```  
-  
-2. If modules are loadable (m), not built-in (y), check if the file exists:  
-  
-```bash  
-ls /lib/modules/$(uname -r)/kernel/drivers/media/usb/uvc/  
-```  
-  
-3. Load the module and check for errors (optional if built-in):  
-  
-```bash  
-sudo modprobe uvcvideo  
-dmesg | tail  
-```  
-  
-4. Verify video devices:  
-  
-```bash  
-sudo ls -al /dev/video*  
-```  
-  
-#### 6. Set Up Permissions  
-  
-1. Add user to video group and set permissions:  
-  
-```bash  
-sudo usermod -a -G video $USER  
-sudo chgrp video /dev/video0 /dev/video1  
-sudo chmod 660 /dev/video0 /dev/video1  
-```  
-  
-2. Create a udev rule for permanent permissions:  
-  
-```bash  
-sudo nano /etc/udev/rules.d/81-webcam.rules  
-```  
-  
-Add this content:  
-  
-```  
-KERNEL=="video[0-9]*", GROUP="video", MODE="0660"  
-```  
-  
-3. Reload udev rules:  
-  
-```bash  
-sudo udevadm control --reload-rules && sudo udevadm trigger  
-```  
-  
-4. Log out and log back into your WSL session.  
-  
+#### 1. Install WSL2 Ubuntu
+
+Install WSL2 Ubuntu from the Microsoft Store or using PowerShell:
+
+#### 2. Enable USB Support in WSL2
+
+1. Install the USB/IP tool for Windows:
+[https://learn.microsoft.com/en-us/windows/wsl/connect-usb](https://learn.microsoft.com/en-us/windows/wsl/connect-usb)
+
+2. In Windows PowerShell (as Administrator), connect your webcam to WSL:
+
+```powershell
+usbipd list
+usbipd bind --busid x-x # Replace x-x with your webcam's bus ID
+usbipd attach --wsl --busid x-x # Replace x-x with your webcam's bus ID
+```
+ You need to redo the above every time you reboot wsl or re-connect your webcam/usb device.
+
+#### 3. Rebuild WSL2 Ubuntu Kernel with USB and Webcam Modules
+
+Follow these steps to rebuild the kernel:
+
+1. Start with this guide: [https://github.com/PINTO0309/wsl2_linux_kernel_usbcam_enable_conf](https://github.com/PINTO0309/wsl2_linux_kernel_usbcam_enable_conf)
+
+2. When you reach the `sudo wget [github.com](http://github.com/)...PINTO0309` step, which won't work for newer kernel versions, follow this video instead or alternatively follow the video tutorial from the beginning:
+[https://www.youtube.com/watch?v=t_YnACEPmrM](https://www.youtube.com/watch?v=t_YnACEPmrM)
+
+Additional info: [https://askubuntu.com/questions/1413377/camera-not-working-in-cheese-in-wsl2](https://askubuntu.com/questions/1413377/camera-not-working-in-cheese-in-wsl2)
+
+3. After rebuilding, restart WSL with the new kernel.
+
+#### 4. Set Up Deep-Live-Cam Project
+ Within Ubuntu:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/iVideoGameBoss/iRoopDeepFaceCam.git
+```
+
+2. Follow the installation instructions in the repository, including cuda toolkit 11.8, make 100% sure it's not cuda toolkit 12.x.
+
+#### 5. Verify and Load Kernel Modules
+
+1. Check if USB and webcam modules are built into the kernel:
+
+```bash
+zcat /proc/config.gz | grep -i "CONFIG_USB_VIDEO_CLASS"
+```
+
+2. If modules are loadable (m), not built-in (y), check if the file exists:
+
+```bash
+ls /lib/modules/$(uname -r)/kernel/drivers/media/usb/uvc/
+```
+
+3. Load the module and check for errors (optional if built-in):
+
+```bash
+sudo modprobe uvcvideo
+dmesg | tail
+```
+
+4. Verify video devices:
+
+```bash
+sudo ls -al /dev/video*
+```
+
+#### 6. Set Up Permissions
+
+1. Add user to video group and set permissions:
+
+```bash
+sudo usermod -a -G video $USER
+sudo chgrp video /dev/video0 /dev/video1
+sudo chmod 660 /dev/video0 /dev/video1
+```
+
+2. Create a udev rule for permanent permissions:
+
+```bash
+sudo nano /etc/udev/rules.d/81-webcam.rules
+```
+
+Add this content:
+
+```
+KERNEL=="video[0-9]*", GROUP="video", MODE="0660"
+```
+
+3. Reload udev rules:
+
+```bash
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+
+4. Log out and log back into your WSL session.
+
 5. Start Deep-Live-Cam with `python run.py --execution-provider cuda --max-memory 8` where 8 can be changed to the number of GB VRAM of your GPU has, minus 1-2GB. If you have a RTX3080 with 10GB I suggest adding 8GB. Leave some left for Windows.
 
-#### Final Notes  
-  
-- Steps 6 and 7 may be optional if the modules are built into the kernel and permissions are already set correctly.  
-- Always ensure you're using compatible versions of CUDA, ONNX, and other dependencies.  
-- If issues persist, consider checking the Deep-Live-Cam project's specific requirements and troubleshooting steps.  
-  
+#### Final Notes
+
+- Steps 6 and 7 may be optional if the modules are built into the kernel and permissions are already set correctly.
+- Always ensure you're using compatible versions of CUDA, ONNX, and other dependencies.
+- If issues persist, consider checking the Deep-Live-Cam project's specific requirements and troubleshooting steps.
+
 By following these steps, you should have a WSL2 Ubuntu environment with USB webcam support ready for the Deep-Live-Cam project. If you encounter any issues, refer back to the specific error messages and troubleshooting steps provided.
 
-#### Troubleshooting CUDA Issues  
+#### Troubleshooting CUDA Issues
 
-If you encounter this error:  
-  
-```  
-[ONNXRuntimeError] : 1 : FAIL : Failed to load library [libonnxruntime_providers_cuda.so](http://libonnxruntime_providers_cuda.so/) with error: libcufft.so.10: cannot open shared object file: No such file or directory  
-```  
-  
-Follow these steps:  
-  
-1. Install CUDA Toolkit 11.8 (ONNX 1.16.3 requires CUDA 11.x, not 12.x):  
-[https://developer.nvidia.com/cuda-11-8-0-download-archive](https://developer.nvidia.com/cuda-11-8-0-download-archive)  
+If you encounter this error:
+
+```
+[ONNXRuntimeError] : 1 : FAIL : Failed to load library [libonnxruntime_providers_cuda.so](http://libonnxruntime_providers_cuda.so/) with error: libcufft.so.10: cannot open shared object file: No such file or directory
+```
+
+Follow these steps:
+
+1. Install CUDA Toolkit 11.8 (ONNX 1.16.3 requires CUDA 11.x, not 12.x):
+[https://developer.nvidia.com/cuda-11-8-0-download-archive](https://developer.nvidia.com/cuda-11-8-0-download-archive)
   select: Linux, x86_64, WSL-Ubuntu, 2.0, deb (local)
-2. Check CUDA version:  
-  
-```bash  
-/usr/local/cuda/bin/nvcc --version  
-```  
-  
-3. If the wrong version is installed, remove it completely:  
-[https://askubuntu.com/questions/530043/removing-nvidia-cuda-toolkit-and-installing-new-one](https://askubuntu.com/questions/530043/removing-nvidia-cuda-toolkit-and-installing-new-one)  
-  
+2. Check CUDA version:
+
+```bash
+/usr/local/cuda/bin/nvcc --version
+```
+
+3. If the wrong version is installed, remove it completely:
+[https://askubuntu.com/questions/530043/removing-nvidia-cuda-toolkit-and-installing-new-one](https://askubuntu.com/questions/530043/removing-nvidia-cuda-toolkit-and-installing-new-one)
+
 4. Install CUDA Toolkit 11.8 again [https://developer.nvidia.com/cuda-11-8-0-download-archive](https://developer.nvidia.com/cuda-11-8-0-download-archive), select: Linux, x86_64, WSL-Ubuntu, 2.0, deb (local)
-  
-```bash  
-sudo apt-get -y install cuda-toolkit-11-8  
+
+```bash
+sudo apt-get -y install cuda-toolkit-11-8
 ```
 </details>
 

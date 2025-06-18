@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iRoopDeepFaceCam Web</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 700px; margin: auto; }
+        h1 { text-align: center; color: #5a5a5a; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="file"], select { margin-bottom: 10px; padding: 8px; border-radius: 4px; border: 1px solid #ddd; width: calc(100% - 18px); box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; display: block; width: 100%; margin-top: 20px; }
+        button:hover { background-color: #0056b3; }
+        #status_container { margin-top: 20px; padding: 10px; background-color: #e9ecef; border-radius: 4px; min-height: 50px; }
+        .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px;}
+        .option-item { display: flex; align-items: center; }
+        .option-item input[type="checkbox"] { width: auto; margin-right: 8px; }
+        .option-item label { font-weight: normal; margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>iRoopDeepFaceCam Web</h1>
+
+        <label for="source_image_input">Source Face Image:</label>
+        <input type="file" id="source_image_input" name="source_image_input" accept="image/*" required>
+
+        <label for="target_media_input">Target Image/Video:</label>
+        <input type="file" id="target_media_input" name="target_media_input" accept="image/*,video/*" required>
+
+        <h2>Processing Options:</h2>
+        <div class="options-grid">
+            <div class="option-item">
+                <input type="checkbox" id="face_enhancer_checkbox" name="face_enhancer_checkbox">
+                <label for="face_enhancer_checkbox">Face Enhancer</label>
+            </div>
+            <div class="option-item">
+                <input type="checkbox" id="keep_fps_checkbox" name="keep_fps_checkbox" checked>
+                <label for="keep_fps_checkbox">Keep FPS (Video)</label>
+            </div>
+            <div class="option-item">
+                <input type="checkbox" id="mouth_mask_checkbox" name="mouth_mask_checkbox">
+                <label for="mouth_mask_checkbox">Mouth Mask</label>
+            </div>
+             <div class="option-item">
+                <input type="checkbox" id="face_tracking_checkbox" name="face_tracking_checkbox">
+                <label for="face_tracking_checkbox">Face Tracking (Video)</label>
+            </div>
+        </div>
+
+        <label for="execution_provider_select">Execution Provider:</label>
+        <select id="execution_provider_select" name="execution_provider_select">
+            <option value="cpu">CPU</option>
+            <option value="cuda">CUDA (Nvidia GPU)</option>
+        </select>
+
+        <button onclick="startProcessing()">Start Processing</button>
+
+        <div id="status_container">
+            <p id="status_text">Status: Idle</p>
+            <div id="download_link_container"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentTaskId = null;
+
+        function updateStatusDisplay(message) {
+            document.getElementById('status_text').textContent = 'Status: ' + message;
+        }
+
+        function clearDownloadLink() {
+            document.getElementById('download_link_container').innerHTML = '';
+        }
+
+        async function uploadFile(fileInputId, uploadUrl, fieldName) {
+            const fileInput = document.getElementById(fileInputId);
+            if (fileInput.files.length === 0) {
+                updateStatusDisplay('Error: No file selected for ' + fileInput.name);
+                return null;
+            }
+            const formData = new FormData();
+            formData.append(fieldName, fileInput.files[0]);
+
+            try {
+                const response = await fetch(uploadUrl, { method: 'POST', body: formData });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Upload failed');
+                }
+                updateStatusDisplay(data.message);
+                return data.filepath;
+            } catch (error) {
+                updateStatusDisplay('Error uploading ' + fileInput.name + ': ' + error.message);
+                console.error('Upload error for ' + fileInputId + ':', error);
+                return null;
+            }
+        }
+
+        async function startProcessing() {
+            currentTaskId = null;
+            clearDownloadLink();
+            updateStatusDisplay('Initializing...');
+
+            updateStatusDisplay('Uploading source image...');
+            const sourceFile = await uploadFile('source_image_input', '/upload/source_image', 'source_image');
+            if (!sourceFile) return;
+
+            updateStatusDisplay('Uploading target media...');
+            const targetFile = await uploadFile('target_media_input', '/upload/target_media', 'target_media');
+            if (!targetFile) return;
+
+            const options = {
+                source_path: sourceFile,
+                target_path: targetFile,
+                frame_processors: ['face_swapper'],
+                keep_fps: document.getElementById('keep_fps_checkbox').checked,
+                mouth_mask: document.getElementById('mouth_mask_checkbox').checked,
+                face_tracking: document.getElementById('face_tracking_checkbox').checked,
+                execution_provider: [document.getElementById('execution_provider_select').value]
+            };
+
+            if (document.getElementById('face_enhancer_checkbox').checked) {
+                options.frame_processors.push('face_enhancer');
+            }
+
+            updateStatusDisplay('Starting processing...');
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(options)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.error || 'Processing request failed');
+                }
+                currentTaskId = data.task_id;
+                updateStatusDisplay(data.message + '. Task ID: ' + currentTaskId);
+                if (currentTaskId) {
+                    pollStatus(currentTaskId);
+                }
+            } catch (error) {
+                updateStatusDisplay('Error starting processing: ' + error.message);
+                console.error('Processing error:', error);
+            }
+        }
+
+        function pollStatus(taskId) {
+            const intervalId = setInterval(async () => {
+                if (taskId !== currentTaskId) {
+                    clearInterval(intervalId);
+                    return;
+                }
+                try {
+                    const response = await fetch('/status/' + taskId);
+                    const data = await response.json();
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            updateStatusDisplay('Error: Task ID ' + taskId + ' not found. Stopping polling.');
+                            clearInterval(intervalId);
+                            return;
+                        }
+                        throw new Error(data.error || ('Status check failed with status: ' + response.status) );
+                    }
+
+                    updateStatusDisplay('Task ' + taskId + ': ' + data.status);
+                    if (data.status === 'completed') {
+                        clearInterval(intervalId);
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = '/download/' + taskId;
+                        downloadLink.textContent = 'Download Result: ' + data.output_filename;
+                        document.getElementById('download_link_container').appendChild(downloadLink);
+                    } else if (data.status === 'failed') {
+                        clearInterval(intervalId);
+                        updateStatusDisplay('Task ' + taskId + ' failed: ' + data.error);
+                    }
+                } catch (error) {
+                    updateStatusDisplay('Error polling status for task ' + taskId + ': ' + error.message);
+                    console.error('Polling error for ' + taskId + ':', error);
+                    // Optional: clearInterval(intervalId); // Stop on any polling error
+                }
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

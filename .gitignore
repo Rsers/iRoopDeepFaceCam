@@ -10,3 +10,7 @@ models/inswapper_128_fp16.onnx
 
 # Ignore the venv directory (virtual environment)
 venv/
+
+# Ignore uploaded media and processing outputs
+uploads/
+outputs/
